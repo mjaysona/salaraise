@@ -1,4 +1,4 @@
-import { NextComponentType } from 'next'
+import { NextComponentType } from 'next';
 import styles from './header.module.scss';
 
 const Header: NextComponentType = () => {
@@ -6,7 +6,7 @@ const Header: NextComponentType = () => {
     <div className={styles.header}>
       This is a sample header.
     </div>
-  )
-}
+  );
+};
 
 export default Header;

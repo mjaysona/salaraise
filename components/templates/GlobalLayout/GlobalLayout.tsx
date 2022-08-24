@@ -10,7 +10,7 @@ const Layout: NextComponentType<{ children: GlobalLayoutProps }> = ({ children }
       <Header />
       { children }
     </div>
-  )
-}
+  );
+};
 
 export default Layout;

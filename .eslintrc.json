@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "comma-dangle": [1, "always-multiline"],
+    "jsx-quotes": [1, "prefer-double"],
+    "semi": 1
+  }
 }
