@@ -1,5 +1,5 @@
 import { NextComponentType } from 'next';
-import styles from './header.module.scss';
+import styles from './Header.module.scss';
 
 const Header: NextComponentType = () => {
   return (

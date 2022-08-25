@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { NextComponentType } from "next";
-import Header from "../../header/Header";
+import Header from "../Header/Header";
 
 type GlobalLayoutProps = PropsWithChildren<{}>;
 
