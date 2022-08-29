@@ -38,7 +38,6 @@ const Input: NextPage<AppProps> = ({ ending, onValueChange }) => {
       <div>
         <span className={styles['input--hidden']} ref={span}>{value}</span>
         <input
-          autoFocus
           maxLength={3}
           onFocus={toggleFocus}
           onBlur={toggleFocus}
