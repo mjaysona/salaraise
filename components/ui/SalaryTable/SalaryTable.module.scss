@@ -1,0 +1,28 @@
+@import '../../../styles/variables.scss';
+
+.salary-table {
+  color: white;
+  font-size: 0.7rem;
+  .salary-table__items {
+    border-bottom: 1px solid white;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    .salary-table__item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+  }
+  .salary-table__summary {
+    margin-bottom: 24px;
+  }
+  .salary-table__overall {
+    > div {
+      font-size: 1.6rem;
+      line-height: 2rem;
+      strong {
+        color: $primary-color;
+      }
+    }
+  }
+}

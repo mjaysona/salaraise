@@ -1,0 +1,10 @@
+@import '../../../styles/mixins/input.scss';
+
+.input {
+  @include input;
+  .input__currency {
+    color: white;
+    font-weight: 200;
+    margin-right: 4px;
+  }
+}
