@@ -5,7 +5,9 @@ import styles from './Global.module.scss';
 
 type GlobalLayoutProps = PropsWithChildren<{}>;
 
-const GlobalLayout: NextPage<{ children: GlobalLayoutProps }> = ({ children }) => {
+const GlobalLayout: NextPage<{ children: GlobalLayoutProps }> = ({
+  children,
+}) => {
   return (
     <div className={styles.layout}>
       <Header />
