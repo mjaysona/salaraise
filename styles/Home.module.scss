@@ -1,0 +1,20 @@
+@import '../styles/variables.scss';
+
+.container {
+  display: flex;
+  > div:first-child {
+    margin-right: 80px;
+    max-width: 440px;
+    width: 40%;
+  }
+  > div:last-child {
+    flex: 1;
+    max-width: 720px;
+  }
+}
+
+.content {
+  p > strong {
+    color: $primary-color;
+  }
+}
