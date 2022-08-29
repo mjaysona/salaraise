@@ -18,16 +18,21 @@ const InputAmount: NextPage<{ onValueChange?: Function }>
     const span = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+      console.log('amount: ', amount);
       setWidth(span.current!.offsetWidth);
-    }, [amount.label]);
+    }, [amount]);
 
-    const onInputChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+      console.log('e: ', e.target);
+
       const { value } = e.target;
 
       setAmount({
-        label: Intl.NumberFormat('en-US').format(parseInt(value)),
+        label: value ? Intl.NumberFormat('en-US').format(parseInt(value)) : '',
         value: value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'),
       });
+
+      console.log('value: ', value);
 
       if (onValueChange) {
         onValueChange(value ? parseInt(value) : 0);
@@ -56,7 +61,7 @@ const InputAmount: NextPage<{ onValueChange?: Function }>
             placeholder="0"
             style={{ width }}
             type="text"
-            value={isFocused || !amount.value ? amount.value : amount.label}
+            value={isFocused ? amount.value : amount.label}
           />
         </div>
       </div>
