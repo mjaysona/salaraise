@@ -1,16 +1,17 @@
-import { PropsWithChildren } from "react";
-import { NextComponentType } from "next";
-import Header from "../Header/Header";
+import { PropsWithChildren } from 'react';
+import { NextPage } from 'next';
+import Header from '../Header/Header';
+import styles from './Global.module.scss';
 
 type GlobalLayoutProps = PropsWithChildren<{}>;
 
-const Layout: NextComponentType<{ children: GlobalLayoutProps }> = ({ children }) => {
+const GlobalLayout: NextPage<{ children: GlobalLayoutProps }> = ({ children }) => {
   return (
-    <div>
+    <div className={styles.layout}>
       <Header />
       { children }
     </div>
   );
 };
 
-export default Layout;
+export default GlobalLayout;
