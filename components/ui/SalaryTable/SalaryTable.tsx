@@ -54,7 +54,7 @@ const SalaryTable: NextPage<AppProps> = ({ data, type }:AppProps) => {
             {type === 'current' ? 'Current' : 'Increased'} monthly net income
           </strong>
         </span>
-        <div><span>PHP <strong>{formatAmount(netMonthly)}</strong></span></div>
+        <div><span>₱<strong>{formatAmount(netMonthly)}</strong></span></div>
       </div>
     </div>
   );

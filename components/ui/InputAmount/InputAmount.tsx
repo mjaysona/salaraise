@@ -47,7 +47,7 @@ const InputAmount: NextPage<{ onValueChange?: Function }>
 
     return (
       <div className={styles['input']}>
-        <span className={styles['input__currency']}>PHP</span>
+        <span className={styles['input__currency']}>₱</span>
         <div>
           <span className={styles['input--hidden']} ref={span}>
             {isFocused || !amount.value ? amount.value : amount.label}

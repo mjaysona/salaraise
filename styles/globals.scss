@@ -36,6 +36,8 @@ main {
   body {
     color: white;
 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     /* ff 3.6+ */
     background:-moz-radial-gradient(ellipse at 18% 0%, rgba(243, 23, 23, 1) 0%, rgba(0, 36, 227, 1) 100%);
     /* safari 5.1+,chrome 10+ */

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import styles from './Form.module.scss';
-import Dropdown from '@/components/ui/Dropdown/Dropdown';
+import SelectDropdown from '@/components/ui/SelectDropdown/SelectDropdown';
 import Input from '@/components/ui/Input/Input';
 import InputAmount from '@/components/ui/InputAmount/InputAmount';
 import { useEffect, useState } from 'react';
@@ -13,12 +13,33 @@ const Form: NextPage<{ onFormUpdate: Function }> = ({ onFormUpdate }) => {
     onFormUpdate({ salary, percentage });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [salary, percentage]);
+
+  const optionsMock = [
+    {
+      name: 'raise',
+      label: 'Expected raise',
+      isSelected: true,
+    },
+    {
+      name: 'annualIncome',
+      label: 'Annual income',
+      isSelected: false,
+    },
+    {
+      name: 'tax',
+      label: 'Tax for bonuses',
+      isSelected: false,
+    },
+  ];
   
   return (
     <form className={styles['form']}>
       <div className={styles['form__field']}>
-        <label>I want to</label>
-        <Dropdown />
+        <label>I want to calculate my</label>
+        <SelectDropdown
+          data={optionsMock}
+          selectItem={(e:Event) => console.log(e.target)}
+        />
       </div>
       <div className={styles['form__field']}>
         <label>What’s your gross monthly basic salary?</label>
