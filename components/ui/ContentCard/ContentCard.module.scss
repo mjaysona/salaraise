@@ -28,3 +28,14 @@
   }
 }
 
+@media only screen and (max-width: 540px) {
+  .content-card {
+    display: block;
+    padding: 24px 32px;
+    > div:first-child {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+
