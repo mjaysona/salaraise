@@ -12,10 +12,18 @@ const Input: NextPage<AppProps> = ({ ending, onValueChange }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
   const span = useRef<HTMLDivElement>(null);
+  const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setWidth(span.current!.offsetWidth);
   }, [value]);
+
+  const onInputClick = () => {
+    if (!isFocused) {
+      input.current?.focus();
+      setIsFocused(true);
+    }
+  };
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -34,7 +42,7 @@ const Input: NextPage<AppProps> = ({ ending, onValueChange }) => {
   };
 
   return (
-    <div className={styles['input']}>
+    <div className={styles['input']} onClick={onInputClick}>
       <div>
         <span className={styles['input--hidden']} ref={span}>{value}</span>
         <input
@@ -43,6 +51,7 @@ const Input: NextPage<AppProps> = ({ ending, onValueChange }) => {
           onBlur={toggleFocus}
           onChange={onInputChange}
           placeholder="0"
+          ref={input}
           style={{ width }}
           type="text"
           value={value}

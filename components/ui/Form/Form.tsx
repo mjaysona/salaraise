@@ -41,7 +41,9 @@ const Form: NextPage<{ onFormUpdate: Function }> = ({ onFormUpdate }) => {
           selectItem={(e:Event) => console.log(e.target)}
         />
       </div>
-      <div className={styles['form__field']}>
+      <div
+        className={styles['form__field']}
+      >
         <label>What’s your gross monthly basic salary?</label>
         <InputAmount
           onValueChange={(salary: number) => setSalary(salary)}
