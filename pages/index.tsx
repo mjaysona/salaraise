@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import Form from '@/components/ui/Form/Form';
+import Form from '@/components/ui/Forms/Form';
 import ContentCard from '@/components/ui/ContentCard/ContentCard';
 import { useEffect, useState } from 'react';
 import { FormValues, Salary } from '@/interfaces/form';
@@ -17,7 +17,6 @@ import {
 import styles from '../styles/Home.module.scss';
 
 const DEFAULT_SALARY = {
-  grossMonthly: 0,
   taxDue: 0,
   sss: 0,
   philhealth: 0,
@@ -41,6 +40,7 @@ const Home: NextPage = () => {
   const [currentSalary, setCurrentSalary] = useState<Salary>(DEFAULT_SALARY);
   const [increase, setIncrease] = useState<Salary>(DEFAULT_SALARY);
   const [salary, setSalary] = useState<number>(0);
+  const [formType, setFormType] = useState<'raise' | 'annual'>('raise');
   const [percentage, setPercentage] = useState<number>(0);
   const [netDifference, setNetDifference] = useState<NetDifference>({
     value: 0,
@@ -49,7 +49,7 @@ const Home: NextPage = () => {
 
   const handleFormUpdate = ({ salary, percentage }: FormValues) => {
     setSalary(salary);
-    setPercentage(percentage);
+    setPercentage(percentage || 0);
   };
 
   const computeNetIncome = ({ salary, deductions, taxDue }: NetIncome) => {
@@ -81,15 +81,27 @@ const Home: NextPage = () => {
     const overallDeductions = taxDue + deductions;
     const isValid = (() => isValidSalary(salaryToCompute))();
 
-    return {
-      grossMonthly: salaryToCompute,
-      taxDue: taxDue,
-      sss: sss,
-      philhealth: isValid ? philhealth: 0,
-      pagibig: isValid ? pagibig : 0,
-      overallDeductions: isValid ? overallDeductions : 0,
-      netMonthly: isValid ? netMonthly : 0,
-    };
+    if (formType === 'raise') {
+      return {
+        grossMonthly: salaryToCompute,
+        taxDue: taxDue,
+        sss: sss,
+        philhealth: isValid ? philhealth: 0,
+        pagibig: isValid ? pagibig : 0,
+        overallDeductions: isValid ? overallDeductions : 0,
+        netMonthly: isValid ? netMonthly : 0,
+      };
+    } else {
+      return {
+        grossAnnual: salaryToCompute * 12,
+        taxDue: taxDue * 12,
+        sss: sss * 12,
+        philhealth: isValid ? philhealth * 12: 0,
+        pagibig: isValid ? pagibig * 12 : 0,
+        overallDeductions: isValid ? overallDeductions * 12 : 0,
+        netAnnual: isValid ? netMonthly * 12 : 0,
+      };
+    }
   };
 
   const getNetDifference = (current:number, increase:number):NetDifference => {
@@ -129,12 +141,14 @@ const Home: NextPage = () => {
           <div>
             <Form
               onFormUpdate={handleFormUpdate}
+              onItemSelect={(formType:'raise' | 'annual') => setFormType(formType)}
             />
           </div>
           <div className={styles['content']}>
             <ContentCard
-              currentSalary={currentSalary}
-              increasedSalary={increase}
+              currentSalaryData={currentSalary}
+              increasedSalaryData={increase}
+              contentType={formType}
             />
             {
               !!(percentage && isValidSalary(salary)) &&

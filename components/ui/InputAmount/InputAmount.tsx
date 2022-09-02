@@ -34,7 +34,9 @@ const InputAmount: NextPage<{ onValueChange?: Function }>
 
       setAmount({
         label: value ? Intl.NumberFormat('en-US').format(parseInt(value)) : '',
-        value: value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1'),
+        value: value.replace(/[^0-9]/g, '')
+          .replace(/(\..*)\./g, '$1')
+          .replace(/^0+/, ''),
       });
 
       if (onValueChange) {

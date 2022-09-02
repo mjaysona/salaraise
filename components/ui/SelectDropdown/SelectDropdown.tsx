@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
+import { DropdownOption } from '@/interfaces/form';
 import styles from './SelectDropdown.module.scss';
 
 const DEFAULT_OPTION = {
@@ -10,45 +11,40 @@ const DEFAULT_OPTION = {
   isSelected: false,
 };
 
-interface Option {
-  name: string,
-  label: string,
-  isSelected: boolean,
-};
-
 interface AppProps {
-  data: Option[],
+  data: DropdownOption[],
   selectItem: Function,
 };
 
 const SelectDropdown: NextPage<AppProps> = ({ data, selectItem }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [options, setOptions] = useState<Option[]>([]);
-  const [selected, setSelected] = useState<Option>(DEFAULT_OPTION);
+  const [options, setOptions] = useState<DropdownOption[]>([]);
+  const [selected, setSelected] = useState<DropdownOption>(DEFAULT_OPTION);
 
-  const handleOptionSelect = (name:string) => {
+  const handleOptionSelect = (item:DropdownOption) => {
     setIsOpen(false);
 
-    const updatedOptions:Option[] = options.map((option:Option) => {
+    const updatedOptions:DropdownOption[] = options.map((option:DropdownOption) => {
       return {
         ...option,
-        isSelected: option.name === name
+        isSelected: option.name === item.name
       };
     });
 
-    setOptions(updatedOptions);
+    setOptions([...updatedOptions]);
   };
 
   useEffect(() => {
     setOptions(data);
-  }, [data]);
+  }, []);
 
   useEffect(() => {
-    const selected:Option | undefined = options.find((option:Option) => {
+    const selected:DropdownOption | undefined = options.find((option:DropdownOption) => {
       return option.isSelected;
     });
 
     setSelected(selected || DEFAULT_OPTION);
+    selectItem(selected);
   }, [options]);
 
   return (
@@ -66,14 +62,14 @@ const SelectDropdown: NextPage<AppProps> = ({ data, selectItem }) => {
       `}>
         {options
           .filter((option) => !option.isSelected)
-          .map(({ name, label }) => {
+          .map((option) => {
             return (
               <div
                 className={styles['dropdown__selection__item']}
-                onClick={() => handleOptionSelect(name)}
-                key={name}
+                onClick={() => handleOptionSelect(option)}
+                key={option.name}
               >
-                <strong>{label}</strong>
+                <strong>{option.label}</strong>
               </div>
             );
           })

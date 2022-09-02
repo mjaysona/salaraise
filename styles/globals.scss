@@ -2,16 +2,17 @@ html {
   font-family: 'MuseoModerno', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 20px;
+  background: rgba(0, 36, 227, 1);
+  background-image: radial-gradient(157.43% 106.74% at 29.93% -6.74%, #FF1717 0%, #6A00D5 72.54%, #0024E3 100%);
   /* ff 3.6+ */
-  background-image:-moz-radial-gradient(ellipse at 18% 0%, rgba(243, 23, 23, 1) 0%, rgba(0, 36, 227, 1) 100%);
   /* safari 5.1+,chrome 10+ */
-  background-image:-webkit-radial-gradient(ellipse at 18% 0%, rgba(243, 23, 23, 1) 0%, rgba(0, 36, 227, 1) 100%);
+  background-image:- radial-gradient(157.43% 106.74% at 29.93% -6.74%, #FF1717 0%, #6A00D5 72.54%, #0024E3 100%);
   /* opera 11.10+ */
-  background-image:-o-radial-gradient(ellipse at 18% 0%, rgba(243, 23, 23, 1) 0%, rgba(0, 36, 227, 1) 100%);
+  background-image: radial-gradient(157.43% 106.74% at 29.93% -6.74%, #FF1717 0%, #6A00D5 72.54%, #0024E3 100%);
   /* ie 10+ */
-  background-image:-ms-radial-gradient(ellipse at 18% 0%, rgba(243, 23, 23, 1) 0%, rgba(0, 36, 227, 1) 100%);
+  background-image: radial-gradient(157.43% 106.74% at 29.93% -6.74%, #FF1717 0%, #6A00D5 72.54%, #0024E3 100%);
   /* global 92%+ browsers support */
-  background-image:radial-gradient(ellipse at 18% 0%, rgba(243, 23, 23, 1) 0%, rgba(0, 36, 227, 1) 100%);
+  background-image: radial-gradient(157.43% 106.74% at 29.93% -6.74%, #FF1717 0%, #6A00D5 72.54%, #0024E3 100%);
 }
 
 html,
