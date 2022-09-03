@@ -11,4 +11,6 @@ const locale = (param: Locale) => {
   };
 };
 
-export const localize = mapLocale(locale);
+const localize = mapLocale(locale);
+
+export { localize };

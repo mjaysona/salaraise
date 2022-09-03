@@ -7,4 +7,6 @@ const locale = () => {
   };
 };
 
-export const localize = mapLocale(locale);
+const localize = mapLocale(locale);
+
+export { localize };
