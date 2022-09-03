@@ -3,10 +3,11 @@ import { Salary, SalaryTableData, SalaryTableItemObj } from '@/interfaces/form';
 import SalaryTable from '../SalaryTable/SalaryTable';
 import styles from './ContentCard.module.scss';
 import { useEffect, useState } from 'react';
+import { localize } from './locale';
 
 interface AppProps {
   currentSalaryData: Salary,
-  contentType: 'raise' | 'annual',
+  contentType: 'raise' | 'annualIncome',
   increasedSalaryData: Salary,
 };
 
@@ -18,8 +19,8 @@ const ContentCard: NextPage<AppProps> = ({
   const [currentSalary, setCurrentSalary] = useState<SalaryTableData>([]);
   const [increasedSalary, setIncreasedSalary] = useState<SalaryTableData>([]);
 
-  const mapData = (salaryData:Salary) => {
-    let mappedData:Salary[] = [];
+  const mapData = (salaryData:Salary):SalaryTableData => {
+    let mappedData:SalaryTableData = [];
 
     Object.entries(salaryData).forEach(([key, value]) => {
       const mappedEntry:SalaryTableItemObj = {
@@ -43,11 +44,23 @@ const ContentCard: NextPage<AppProps> = ({
 
   return (
     <div className={styles['content-card']}>
-      <SalaryTable data={currentSalary} type="current" />
-      {
-        contentType === 'raise'
-          && <SalaryTable data={increasedSalary} type="increased" />
+      {contentType === 'annualIncome' &&
+        <p><small>{localize('exlusions')}</small></p>
       }
+      <div>
+        <SalaryTable
+          data={currentSalary}
+          period={contentType === 'raise' ? 'monthly' : 'annual'}
+          type="current"
+        />
+        {contentType === 'raise' &&
+          <SalaryTable 
+            data={increasedSalary}
+            period="monthly"
+            type="increased"
+          />
+        }
+      </div>
     </div>
   );
 };

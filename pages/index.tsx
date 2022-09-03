@@ -15,6 +15,7 @@ import {
   isValidSalary,
 } from '@/utils/formulas';
 import styles from '../styles/Home.module.scss';
+import { localize } from './locale';
 
 const DEFAULT_SALARY = {
   taxDue: 0,
@@ -22,7 +23,18 @@ const DEFAULT_SALARY = {
   philhealth: 0,
   pagibig: 0,
   overallDeductions: 0,
+};
+
+const DEFAULT_MONTHLY = {
+  grossMonthly: 0,
+  ...DEFAULT_SALARY,
   netMonthly: 0,
+};
+
+const DEFAULT_ANNUALY = {
+  grossAnnual: 0,
+  ...DEFAULT_SALARY,
+  netAnnual: 0,
 };
 
 interface NetIncome {
@@ -32,20 +44,25 @@ interface NetIncome {
 };
 
 interface NetDifference {
-  value: number,
-  percentage: number,
+  value: number|undefined,
+  percentage: number|undefined,
 };
 
 const Home: NextPage = () => {
-  const [currentSalary, setCurrentSalary] = useState<Salary>(DEFAULT_SALARY);
-  const [increase, setIncrease] = useState<Salary>(DEFAULT_SALARY);
+  const [currentSalary, setCurrentSalary] = useState<Salary>(DEFAULT_MONTHLY);
+  const [increase, setIncrease] = useState<Salary>(DEFAULT_MONTHLY);
   const [salary, setSalary] = useState<number>(0);
-  const [formType, setFormType] = useState<'raise' | 'annual'>('raise');
+  const [formType, setFormType] = useState<'raise' | 'annualIncome'>('raise');
   const [percentage, setPercentage] = useState<number>(0);
   const [netDifference, setNetDifference] = useState<NetDifference>({
     value: 0,
     percentage: 0,
   });
+
+  const handleFormTypeChange = (formType:'raise' | 'annualIncome') => {
+    setFormType(formType);
+    setCurrentSalary(formType === 'raise' ? DEFAULT_MONTHLY : DEFAULT_ANNUALY);
+  };
 
   const handleFormUpdate = ({ salary, percentage }: FormValues) => {
     setSalary(salary);
@@ -104,11 +121,14 @@ const Home: NextPage = () => {
     }
   };
 
-  const getNetDifference = (current:number, increase:number):NetDifference => {
+  const getNetDifference = (
+    current:number|undefined,
+    increase:number|undefined,
+  ):NetDifference => {
     return {
-      value: increase - current,
+      value: (increase && current) && increase - current,
       percentage: current || increase
-        ? ((increase - current)/current)*100
+        ? (increase && current) && ((increase - current)/current)*100
         : 0,
     };
   };
@@ -117,7 +137,7 @@ const Home: NextPage = () => {
     setCurrentSalary(computeSalary());
     setIncrease(percentage
       ? computeSalary('increase')
-      : DEFAULT_SALARY
+      : DEFAULT_MONTHLY
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [salary, percentage]);
@@ -141,7 +161,7 @@ const Home: NextPage = () => {
           <div>
             <Form
               onFormUpdate={handleFormUpdate}
-              onItemSelect={(formType:'raise' | 'annual') => setFormType(formType)}
+              onItemSelect={handleFormTypeChange}
             />
           </div>
           <div className={styles['content']}>
@@ -153,10 +173,20 @@ const Home: NextPage = () => {
             {
               !!(percentage && isValidSalary(salary)) &&
               <p>
-                A <strong>{percentage}%</strong> increase in your monthly gross increases your
-                monthly net by ₱<strong>{formatAmount(netDifference.value)}</strong> which
-                is <strong>{formatAmount(netDifference.percentage)}%</strong> higher than your
-                current monthly net.
+                {localize('raiseSummary', {
+                  percentage: 
+                    <strong className={styles['strong']}>
+                      {percentage}%
+                    </strong>,
+                  netDifferenceValue:
+                    <strong className={styles['strong']}>
+                      ₱{formatAmount(netDifference.value)}
+                    </strong>,
+                  netDifferencePercentage:
+                    <strong className={styles['strong']}>
+                      {formatAmount(netDifference.percentage)}%
+                    </strong>,
+                })}
               </p>
             }
           </div>

@@ -5,6 +5,7 @@ import { DropdownOption } from '@/interfaces/form';
 import { useEffect, useState } from 'react';
 import CalculateRaiseForm from './calculateRaiseForm.tsx/CalculateRaiseForm';
 import AnnualIncomeForm from './calculateRaiseForm.tsx/AnnualIncomeForm';
+import { localize } from './locale';
 
 const DEFAULT_OPTION = {
   name: '',
@@ -29,7 +30,8 @@ const Form: NextPage<{ onItemSelect: Function, onFormUpdate: Function }> = ({
   onItemSelect,
   onFormUpdate,
 }) => {
-  const [selectedItem, setSelectedItem] = useState<DropdownOption>(DEFAULT_OPTION);
+  const [selectedItem, setSelectedItem]
+    = useState<DropdownOption>(DEFAULT_OPTION);
 
   const selectItem = (item: DropdownOption) => {
     setSelectedItem(item);
@@ -37,12 +39,13 @@ const Form: NextPage<{ onItemSelect: Function, onFormUpdate: Function }> = ({
 
   useEffect(() => {
     onItemSelect(selectedItem?.name);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItem]);
   
   return (
     <form className={styles['form']}>
       <div className={styles['form__field']}>
-        <label>I want to calculate my</label>
+        <label>{localize('iWantTo')}</label>
         <SelectDropdown
           data={OPTIONS}
           selectItem={selectItem}
@@ -51,10 +54,10 @@ const Form: NextPage<{ onItemSelect: Function, onFormUpdate: Function }> = ({
       {(() => {
         if (selectedItem) {
           if (selectedItem.name === 'raise') {
-            return <CalculateRaiseForm onFormUpdate={onFormUpdate} />
+            return <CalculateRaiseForm onFormUpdate={onFormUpdate} />;
           }
           if (selectedItem.name === 'annualIncome') {
-            return <AnnualIncomeForm onFormUpdate={onFormUpdate} />
+            return <AnnualIncomeForm onFormUpdate={onFormUpdate} />;
           }
         }
       })()}

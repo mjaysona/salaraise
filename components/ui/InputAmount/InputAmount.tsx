@@ -58,7 +58,7 @@ const InputAmount: NextPage<{ onValueChange?: Function }>
             {isFocused || !amount.value ? amount.value : amount.label}
           </span>
           <input
-            inputMode='numeric'
+            inputMode="numeric"
             maxLength={7}
             onFocus={toggleFocus}
             onBlur={toggleFocus}

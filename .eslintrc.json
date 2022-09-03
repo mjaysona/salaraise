@@ -11,8 +11,7 @@
       "error",
       {
         "code": 80,
-        "ignoreUrls": true,
-        "ignoreHTMLTextContents": true
+        "ignoreUrls": true
       }
     ]
   }

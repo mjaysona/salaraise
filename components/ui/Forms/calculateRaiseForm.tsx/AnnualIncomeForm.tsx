@@ -4,7 +4,9 @@ import InputAmount from '@/components/ui/InputAmount/InputAmount';
 import { FormValues } from '@/interfaces/form';
 import { useEffect, useState } from 'react';
 
-const AnnualIncomeForm: NextPage<{ onFormUpdate: Function }> = ({ onFormUpdate }) => {
+const AnnualIncomeForm: NextPage<{ onFormUpdate: Function }> = ({
+  onFormUpdate,
+}) => {
   const [salary, setSalary] = useState<number>(0);
 
   useEffect(() => {

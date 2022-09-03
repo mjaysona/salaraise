@@ -24,27 +24,31 @@ const SelectDropdown: NextPage<AppProps> = ({ data, selectItem }) => {
   const handleOptionSelect = (item:DropdownOption) => {
     setIsOpen(false);
 
-    const updatedOptions:DropdownOption[] = options.map((option:DropdownOption) => {
-      return {
-        ...option,
-        isSelected: option.name === item.name
-      };
-    });
+    const updatedOptions:DropdownOption[] = options
+      .map((option:DropdownOption) => {
+        return {
+          ...option,
+          isSelected: option.name === item.name,
+        };
+      });
 
     setOptions([...updatedOptions]);
   };
 
   useEffect(() => {
     setOptions(data);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    const selected:DropdownOption | undefined = options.find((option:DropdownOption) => {
-      return option.isSelected;
-    });
+    const selected:DropdownOption | undefined = options
+      .find((option:DropdownOption) => {
+        return option.isSelected;
+      });
 
     setSelected(selected || DEFAULT_OPTION);
     selectItem(selected);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options]);
 
   return (

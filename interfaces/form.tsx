@@ -1,5 +1,3 @@
-import { Either } from './utils';
-
 interface DropdownOption {
   name: string,
   label: string,
@@ -11,33 +9,33 @@ interface FormValues {
   percentage?: number,
 };
 
+interface SalaryFields {
+  taxDue: number,
+  sss: number,
+  philhealth: number,
+  pagibig: number,
+  overallDeductions: number,
+}
+
 interface MonthlyFields {
   grossMonthly: number,
   netMonthly: number,
+  grossAnnual?: never,
+  netAnnual?: never,
 }
 
 interface AnnualFields {
+  grossMonthly?: never,
+  netMonthly?: never,
   grossAnnual: number,
   netAnnual: number,
 }
 
-interface MonthlySalary extends MonthlyFields {
-  taxDue: number,
-  sss: number,
-  philhealth: number,
-  pagibig: number,
-  overallDeductions: number,
-};
+interface MonthlySalary extends MonthlyFields, SalaryFields {};
 
-interface AnnualSalary extends AnnualFields {
-  taxDue: number,
-  sss: number,
-  philhealth: number,
-  pagibig: number,
-  overallDeductions: number,
-};
+interface AnnualSalary extends AnnualFields, SalaryFields {};
 
-type Salary = Either<MonthlySalary, AnnualSalary>;
+type Salary = MonthlySalary | AnnualSalary;
 
 interface FormValues {
   salary: number,
