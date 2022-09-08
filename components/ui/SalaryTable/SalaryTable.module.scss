@@ -28,9 +28,9 @@
 
 @media only screen and (max-width: 820px) {
   .salary-table {
+    font-size: 1rem;
     .salary-table__items {
       .salary-table__item {
-        display: block;
         > span {
           display: block;
           &:last-child {
@@ -52,6 +52,7 @@
 
 @media only screen and (max-width: 540px) {
   .salary-table {
+    padding: min(8vw, 56px) min(7.5vw, 40px) min(12vw, 80px);
     .salary-table__items {
       .salary-table__item {
         display: flex;
