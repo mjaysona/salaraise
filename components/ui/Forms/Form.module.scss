@@ -5,6 +5,9 @@
       margin-bottom: 12px;
       display: block;
     }
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 

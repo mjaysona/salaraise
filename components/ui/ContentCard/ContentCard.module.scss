@@ -39,6 +39,10 @@
         border-bottom: $gray-light solid 1px;
       }
     }
+    > p {
+      margin: 0;
+      padding: min(8vw, 56px) min(7.5vw, 40px) 0;
+    }
   }
 }
 
