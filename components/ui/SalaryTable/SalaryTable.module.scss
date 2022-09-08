@@ -49,3 +49,32 @@
     }
   }
 }
+
+@media only screen and (max-width: 540px) {
+  .salary-table {
+    .salary-table__items {
+      .salary-table__item {
+        display: flex;
+        > span {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .salary-table {
+    .salary-table__items {
+      .salary-table__item {
+        display: flex;
+        > span {
+          font-size: 0.75rem;
+          &:last-child {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+  }
+}
