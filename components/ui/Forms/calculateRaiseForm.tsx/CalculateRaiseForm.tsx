@@ -23,19 +23,19 @@ const CalculateRaiseForm: NextPage<{ onFormUpdate: Function }> = ({
   
   return (
     <>
+      <div className={styles['form__field']}>
+        <label>How much increase do you want?</label>
+        <Input
+          ending="%"
+          onValueChange={(percentage: number) => setPercentage(percentage)}
+        />
+      </div>
       <div
         className={styles['form__field']}
       >
         <label>What’s your gross monthly basic salary?</label>
         <InputAmount
           onValueChange={(salary: number) => setSalary(salary)}
-        />
-      </div>
-      <div className={styles['form__field']}>
-        <label>How much increase do you want?</label>
-        <Input
-          ending="%"
-          onValueChange={(percentage: number) => setPercentage(percentage)}
         />
       </div>
     </>

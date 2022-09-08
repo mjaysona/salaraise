@@ -5,8 +5,13 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin=''
+          />
           <link
-            href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@200;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@400;600&display=swap"
             rel="stylesheet"
           />
         </Head>
