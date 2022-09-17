@@ -6,7 +6,7 @@ import { localize } from './locale';
 import { useEffect, useState } from 'react';
 
 interface AppProps {
-data: SalaryTableData,
+  data: SalaryTableData,
   type: 'current' | 'increased',
   period: 'annual' | 'monthly',
 };
@@ -36,12 +36,14 @@ const SalaryTable: NextPage<AppProps> = ({ data, type, period }:AppProps) => {
       <div className={styles['salary-table__items']}>
         {
           data.map((item:SalaryTableItemObj) => {
-            return (
-              <div key={item.label} className={styles['salary-table__item']}>
-                <span>{localize(item.label)}</span>
-                <span>{formatAmount(item.amount)}</span>
-              </div>
-            );
+            if (item.label !== 'netMonthly') {
+              return (
+                <div key={item.label} className={styles['salary-table__item']}>
+                  <span>{localize(item.label)}</span>
+                  <span>{formatAmount(item.amount)}</span>
+                </div>
+              );
+            }
           })
         }
       </div>
